@@ -40,7 +40,7 @@ exports.getTasks = async (req, res) => {
     if (isProject) {
       tasks = await Task.find({ project: id }).populate("assignee", "username email").populate("reporter", "username email").populate("comments").populate("project", "title");
     } else {
-      tasks = await Task.find({ assignee: id }).populate("project", "title").populate("reporter", "username email").populate("comments").populate("project", "title").populate("attachments").populate("comments.createdBy", "username email");
+      tasks = await Task.find({ assignee: id }).populate("project", "title").populate("reporter", "username email").populate("comments").populate("project", "title").populate("comments.createdBy", "username email");
     }
 
     if(tasks.length === 0) {
@@ -75,7 +75,7 @@ exports.getTaskById = async (req, res) => {
           select: "username email"
         }
       }
-    ).populate("project", "title").populate("attachments").populate("comments.createdBy", "username email");
+    ).populate("project", "title").populate("comments.createdBy", "username email");
 
     if(!task) {
       return res.status(404).json({
@@ -92,7 +92,8 @@ exports.getTaskById = async (req, res) => {
   } catch (err) {
     res.status(500).json({
         message: "Unable to fetch task",
-        success: false
+        success: false,
+        err: err.message
     });
   }
 };
