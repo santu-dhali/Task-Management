@@ -1,7 +1,6 @@
 const Task = require("../models/Task");
 const Project = require("../models/Project");
 const Comment = require("../models/Comment");
-const Attachment = require("../models/Attachment");
 
 exports.createTask = async (req, res) => {
   const { title, description, dueDate, priority, projectId, status } = req.body;
@@ -147,26 +146,3 @@ exports.addComment = async (req, res) => {
     });
   }
 };
-
-// exports.uploadAttachment = async (req, res) => {
-//   const { taskId } = req.body;
-//   const file = req.file;
-
-//   try {
-//     const attachment = await Attachment.create({ filename: file.originalname, path: file.path, task: taskId, uploadedBy: req.user.id });
-
-//     await Task.findByIdAndUpdate(taskId, { $push: { attachments: attachment._id } });
-
-//     res.status(201).json({
-//         message: "Attachment uploaded successfully",
-//         success: true,
-//         attachment
-//     });
-//   } catch (err) {
-//     res.status(500).json({
-//         message: "Unable to upload attachment",
-//         success: false,
-//         err: err.message
-//     });
-//   }
-// };

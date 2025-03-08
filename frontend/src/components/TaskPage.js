@@ -10,7 +10,7 @@ const TaskPage = () => {
     const [status, setStatus] = useState('');
     const [assigneeEmail, setAssigneeEmail] = useState('');
     const [commentText, setCommentText] = useState('');
-    const [showDialog, setShowDialog] = useState(false); // State for dialog visibility
+    const [showDialog, setShowDialog] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -92,7 +92,7 @@ const TaskPage = () => {
                 },
             }));
             setAssigneeEmail('');
-            setShowDialog(false); // Close dialog after assignment
+            setShowDialog(false);
         } catch (err) {
             console.error('Failed to assign/reassign task:', err);
         }
@@ -155,7 +155,7 @@ const TaskPage = () => {
                                     <p>Assignee: {task.assignee?.username} ({task.assignee?.email})</p>
                                     <div className="assignee-actions">
                                         <span className="assign-icon" onClick={() => setShowDialog(true)}>
-                                            <i className="fas fa-user-edit"></i> {/* Edit icon */}
+                                            <i className="fas fa-user-edit"></i>
                                         </span>
                                         {showDialog && (
                                             <div className="assign-dialog">
@@ -174,7 +174,7 @@ const TaskPage = () => {
                             ) : (
                                 <div className="assignee-actions">
                                     <span className="assign-icon" onClick={() => setShowDialog(true)}>
-                                        <i className="fas fa-user-plus"></i> {/* Add icon */}
+                                        <i className="fas fa-user-plus"></i>
                                     </span>
                                     {showDialog && (
                                         <div className="assign-dialog">

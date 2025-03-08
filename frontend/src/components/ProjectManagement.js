@@ -66,19 +66,17 @@ const ProjectManagement = () => {
                 config
             );
 
-            // Fetch the newly added member's details
             const newMember = await axios.post(
                 `http://localhost:5000/api/v1/email`,
                 { email: memberEmail },
                 config
             );
 
-            // Preserve the full details of `createdBy`, `tasks`, and update `teamMembers`
             const updatedProject = {
                 ...response.data.project,
-                createdBy: project.createdBy, // Preserve the existing createdBy
-                tasks: project.tasks, // Preserve the existing tasks
-                teamMembers: [...project.teamMembers, newMember.data.user], // Add the new member
+                createdBy: project.createdBy,
+                tasks: project.tasks,
+                teamMembers: [...project.teamMembers, newMember.data.user],
             };
 
             setProject(updatedProject);
@@ -112,12 +110,11 @@ const ProjectManagement = () => {
                 config
             );
 
-            // Preserve the full details of `createdBy`, `tasks`, and `teamMembers`
             const updatedProject = {
                 ...response.data.project,
-                createdBy: project.createdBy, // Preserve the existing createdBy
-                tasks: project.tasks, // Preserve the existing tasks
-                teamMembers: project.teamMembers.filter((member) => member._id !== userId), // Update teamMembers
+                createdBy: project.createdBy,
+                tasks: project.tasks,
+                teamMembers: project.teamMembers.filter((member) => member._id !== userId),
             };
 
             setProject(updatedProject);

@@ -58,7 +58,6 @@ const Navbar = () => {
             </div>
 
             <div className="navbar-right">
-                {/* Notifications Bell Icon */}
                 <div className="notifications">
                     <button className="notification-icon" onClick={() => setShowNotifications(!showNotifications)}>
                         <i className="fas fa-bell"></i>
@@ -80,7 +79,6 @@ const Navbar = () => {
                     )}
                 </div>
 
-                {/* Profile Icon */}
                 <div className="profile">
                     <button className="profile-icon" onClick={() => setShowProfileMenu(!showProfileMenu)}>
                         <i className="fas fa-user-circle"></i>
