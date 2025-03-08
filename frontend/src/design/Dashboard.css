@@ -1,0 +1,227 @@
+/* General Dashboard Styles */
+.dashboard {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tabs button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s ease;
+}
+
+.tabs button.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.tabs button:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* Tasks Section */
+.tasks ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.tasks ul li {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.tasks ul li:hover {
+    transform: translateY(-2px);
+}
+
+/* Task Row Layout */
+.task-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.task-row h3 {
+    font-size: 1.2rem;
+    color: #333;
+    flex: 2; /* Title takes more space */
+}
+
+.task-row .status,
+.task-row .priority,
+.task-row .projectName {
+    font-size: 1rem;
+    color: #666;
+    flex: 1; /* Equal width for status and priority */
+    text-align: right;
+}
+
+/* Filters Section */
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filters select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.filters select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Projects Header */
+.projects-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.projects-header h2 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.projects-header button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.projects-header button:hover {
+    background-color: #0056b3;
+}
+
+/* Project Cards Grid */
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Adjust card width */
+    gap: 15px;
+}
+
+/* Project Card */
+.project-card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    gap: 10px; /* Spacing between elements */
+}
+
+.project-card:hover {
+    transform: translateY(-2px);
+}
+
+.project-card h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0;
+}
+
+.project-card p {
+    font-size: 1rem;
+    color: #666;
+    margin: 0;
+}
+
+/* Flexbox for Project Details */
+.project-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.project-details p {
+    text-align: right;
+}
+
+/* Dialog Overlay */
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Dialog Box */
+.dialog {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.dialog h2 {
+    margin-top: 0;
+}
+
+.dialog input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.dialog button {
+    padding: 8px 16px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.dialog button[type='submit'] {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.dialog button[type='button'] {
+    background-color: #ccc;
+    color: #000;
+}
