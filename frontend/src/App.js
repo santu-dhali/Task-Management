@@ -8,6 +8,7 @@ import ProtectedRoute from './components/ProtectedRoutes';
 import TaskPage from './components/TaskPage';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import AdminPortal from './components/AdminPortal';
+import ProfilePage from './components/Profile';
 
 
 const App = () => {
@@ -45,6 +46,14 @@ const App = () => {
                         element={
                             <ProtectedRoute roles={['Admin']}>
                                 <AdminPortal />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/profile"
+                        element={
+                            <ProtectedRoute roles={['Admin']}>
+                                <ProfilePage />
                             </ProtectedRoute>
                         }
                     />

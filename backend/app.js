@@ -20,6 +20,7 @@ app.use('/api/v1', require('./src/routes/userRoutes'));
 app.use('/api/v1', require('./src/routes/projectRoutes'));
 app.use('/api/v1', require('./src/routes/taskRoutes'));
 app.use('/api/v1', require('./src/routes/notificationRoutes'));
+app.use('/api/v1', require('./src/routes/profileRoutes'));
 
 app.get('/', (req, res) => {
     res.send('Hello World');
