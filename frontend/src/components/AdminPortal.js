@@ -13,7 +13,7 @@ const AdminPortal = () => {
                     headers: { Authorization: `Bearer ${token}` },
                 };
 
-                const response = await axios.post('http://localhost:5000/api/v1/users', {}, config);
+                const response = await axios.post('https://task-management-m7aa.onrender.com/api/v1/users', {}, config);
                 setUsers(response.data.users);
             } catch (err) {
                 console.error('Failed to fetch users:', err);
@@ -31,7 +31,7 @@ const AdminPortal = () => {
             };
 
             await axios.put(
-                'http://localhost:5000/api/v1/updaterole',
+                'https://task-management-m7aa.onrender.com/api/v1/updaterole',
                 { userId, role: newRole },
                 config
             );

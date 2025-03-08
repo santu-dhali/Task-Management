@@ -35,7 +35,7 @@ const AuthPage = () => {
             : { username, email, password, confirmPassword };
 
         try {
-            const response = await axios.post(`http://localhost:5000/api/v1/auth/${endpoint}`, payload);
+            const response = await axios.post(`https://task-management-m7aa.onrender.com/api/v1/auth/${endpoint}`, payload);
             console.log(`${isLogin ? 'Login' : 'Signup'} successful:`, response.data);
 
             const token = isLogin ? response.data.existingUser?.token : response.data.user?.token;
