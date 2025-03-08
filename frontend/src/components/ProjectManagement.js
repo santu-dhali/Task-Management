@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import '../design/ProjectManagement.css';
-import { FaDownload } from 'react-icons/fa';
+import { FaDownload, FaTrash } from 'react-icons/fa';
 
 const ProjectManagement = () => {
     const [project, setProject] = useState(null);
@@ -225,12 +225,19 @@ const ProjectManagement = () => {
                     <h3>Team Members</h3>
                     <ul>
                         {project.teamMembers.map((member) => (
-                            console.log(member),
                             <li key={member._id}>
                                 <span>{member.username}</span>
                                 <span>{member.email}</span>
                                 <span>{member.role}</span>
-                                <button onClick={() => handleRemoveMember(member._id)}>Remove</button>
+                                <button
+                                    className="delete-icon"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleRemoveMember(member._id)
+                                    }}
+                                >
+                                    <FaTrash />
+                                </button>
                             </li>
                         ))}
                     </ul>
@@ -276,6 +283,7 @@ const ProjectManagement = () => {
                                 onChange={(e) => setTaskDetails({ ...taskDetails, dueDate: e.target.value })}
                                 placeholder="Due Date"
                                 required
+                                min={new Date().toISOString().split("T")[0]}
                             />
                             <select
                                 value={taskDetails.priority}

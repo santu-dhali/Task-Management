@@ -13,6 +13,13 @@ exports.createTask = async (req, res) => {
   }
 
   try {
+    const existingTask = await Task.findOne({ title, project: projectId });
+    if (existingTask) {
+      return res.status(400).json({
+          message: 'A task with this title already exists in the project',
+          success: false,
+      });
+    }
     const task = await Task.create({title, description, dueDate, priority, project: projectId, reporter: req.user.id, status});
 
     await Project.findByIdAndUpdate(projectId, { $push: { tasks: task._id } });
@@ -144,6 +151,41 @@ exports.addComment = async (req, res) => {
         message: "Unable to add comment",
         success: false,
         err: err.message
+    });
+  }
+};
+
+exports.deleteTask = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const task = await Task.findById(id);
+    if (!task) {
+      return res.status(404).json({
+        message: "Task not found",
+        success: false,
+      });
+    }
+
+    const { project, assignee } = task;
+
+    await Project.findByIdAndUpdate(project, { $pull: { tasks: id } });
+    if (assignee) {
+      await User.findByIdAndUpdate(assignee, { $pull: { tasks: id } });
+    }
+    await Comment.deleteMany({ task: id });
+
+    await Task.findByIdAndDelete(id);
+
+    res.status(200).json({
+      message: "Task deleted successfully",
+      success: true,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Unable to delete task",
+      success: false,
+      err: err.message,
     });
   }
 };

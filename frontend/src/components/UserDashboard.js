@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
+import { FaTrash } from 'react-icons/fa';
 import '../design/Dashboard.css';
 
 const UserDashboard = () => {
@@ -17,6 +18,8 @@ const UserDashboard = () => {
     });
     const [showCreateProjectDialog, setShowCreateProjectDialog] = useState(false);
     const [title, setTitle] = useState('');
+    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+    const [taskToDelete, setTaskToDelete] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -134,6 +137,21 @@ const UserDashboard = () => {
         }
     };
 
+    const handleDeleteTask = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: { Authorization: `Bearer ${token}` },
+            };
+
+            await axios.delete(`http://localhost:5000/api/v1/deletetask/${taskToDelete}`, config);
+            setTaskBoardTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskToDelete));
+            setShowDeleteDialog(false);
+        } catch (err) {
+            console.error('Failed to delete task:', err);
+        }
+    };
+
     const filteredTasks = taskBoardTasks.filter((task) => {
         return (
             (filters.priority === '' || task.priority === filters.priority) &&
@@ -192,7 +210,7 @@ const UserDashboard = () => {
                 {activeTab === 'taskboard' && (
                     <div className="tasks">
                         <h2>Task Board</h2>
-                        {userRole === 'Admin' || userRole === 'Manager' && (
+                        {(userRole === 'Admin' || userRole === 'Manager') && (
                             <div className="filters">
                                 <select
                                     name="priority"
@@ -229,16 +247,26 @@ const UserDashboard = () => {
                                     <option value="Completed">Completed</option>
                                 </select>
                             </div>
-                            )}
+                        )}
                         {(userRole === 'Admin' || userRole === 'Manager' ? filteredTasks : taskBoardTasks).length > 0 ? (
                             <ul>
                                 {(userRole === 'Admin' || userRole === 'Manager' ? filteredTasks : taskBoardTasks).map((task) => (
-                                    <li key={task._id} onClick={() => handleTaskClick(task._id)}>
-                                        <div className="task-row">
+                                    <li key={task._id}>
+                                        <div className="task-row" onClick={() => handleTaskClick(task._id)}>
                                             <h3>{task.title}</h3>
                                             <p className="projectName">{task.project.title}</p>
                                             <p className="status">Status: {task.status}</p>
                                             <p className="priority">Priority: {task.priority}</p>
+                                            <button
+                                                className="delete-icon"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setTaskToDelete(task._id);
+                                                    setShowDeleteDialog(true);
+                                                }}
+                                            >
+                                                <FaTrash />
+                                            </button>
                                         </div>
                                     </li>
                                 ))}
@@ -291,6 +319,19 @@ const UserDashboard = () => {
                                 Cancel
                             </button>
                         </form>
+                    </div>
+                </div>
+            )}
+
+            {showDeleteDialog && (
+                <div className="delete-dialog-overlay">
+                    <div className="delete-dialog">
+                        <h3>Confirm Delete Task?</h3>
+                        <p>Are you sure you want to delete this task? This action cannot be undone.</p>
+                        <div className="delete-dialog-buttons">
+                            <button onClick={handleDeleteTask}>Confirm Delete</button>
+                            <button onClick={() => setShowDeleteDialog(false)}>Cancel</button>
+                        </div>
                     </div>
                 </div>
             )}

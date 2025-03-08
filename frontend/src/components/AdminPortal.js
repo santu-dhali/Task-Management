@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import '../design/AdminPortal.css';
 
 const AdminPortal = () => {
     const [users, setUsers] = useState([]);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -32,7 +30,7 @@ const AdminPortal = () => {
                 headers: { Authorization: `Bearer ${token}` },
             };
 
-            const response = await axios.put(
+            await axios.put(
                 'http://localhost:5000/api/v1/updaterole',
                 { userId, role: newRole },
                 config
