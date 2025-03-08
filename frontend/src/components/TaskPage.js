@@ -27,7 +27,7 @@ const TaskPage = () => {
                 };
 
                 const response = await axios.get(
-                    `http://localhost:5000/api/v1/task/${taskId}`,
+                    `https://task-management-m7aa.onrender.com/api/v1/task/${taskId}`,
                     config
                 );
                 setTask(response.data.task);
@@ -51,7 +51,7 @@ const TaskPage = () => {
             };
 
             const response = await axios.put(
-                'http://localhost:5000/api/v1/status',
+                'https://task-management-m7aa.onrender.com/api/v1/status',
                 { taskId, status: newStatus },
                 config
             );
@@ -69,14 +69,14 @@ const TaskPage = () => {
             };
 
             const userResponse = await axios.post(
-                `http://localhost:5000/api/v1/email`,
+                `https://task-management-m7aa.onrender.com/api/v1/email`,
                 { email: assigneeEmail },
                 config
             );
 
             const newAssigneeId = userResponse.data.user._id;
             const assignResponse = await axios.put(
-                'http://localhost:5000/api/v1/reassigntask',
+                'https://task-management-m7aa.onrender.com/api/v1/reassigntask',
                 { newUserId: newAssigneeId, taskId },
                 config
             );
@@ -107,7 +107,7 @@ const TaskPage = () => {
             };
 
             const response = await axios.post(
-                'http://localhost:5000/api/v1/comment',
+                'https://task-management-m7aa.onrender.com/api/v1/comment',
                 { taskId, text: commentText },
                 config
             );

@@ -35,7 +35,7 @@ const ProjectManagement = () => {
                 };
 
                 const response = await axios.get(
-                    `http://localhost:5000/api/v1/projectdetails/${projectId}`,
+                    `https://task-management-m7aa.onrender.com/api/v1/projectdetails/${projectId}`,
                     config
                 );
                 setProject(response.data.project);
@@ -61,13 +61,13 @@ const ProjectManagement = () => {
             };
 
             const response = await axios.put(
-                'http://localhost:5000/api/v1/updateteam',
+                'https://task-management-m7aa.onrender.com/api/v1/updateteam',
                 { projectId, email: memberEmail, action: 'add' },
                 config
             );
 
             const newMember = await axios.post(
-                `http://localhost:5000/api/v1/email`,
+                `https://task-management-m7aa.onrender.com/api/v1/email`,
                 { email: memberEmail },
                 config
             );
@@ -100,12 +100,12 @@ const ProjectManagement = () => {
             };
 
             const user = await axios.get(
-                `http://localhost:5000/api/v1/${userId}`,
+                `https://task-management-m7aa.onrender.com/api/v1/${userId}`,
                 config
             );
 
             const response = await axios.put(
-                'http://localhost:5000/api/v1/updateteam',
+                'https://task-management-m7aa.onrender.com/api/v1/updateteam',
                 { projectId, email: user.data.user.email, action: 'remove' },
                 config
             );
@@ -137,7 +137,7 @@ const ProjectManagement = () => {
             };
 
             const response = await axios.post(
-                'http://localhost:5000/api/v1/createtask',
+                'https://task-management-m7aa.onrender.com/api/v1/createtask',
                 { ...taskDetails, projectId },
                 config
             );
@@ -166,7 +166,7 @@ const ProjectManagement = () => {
             };
 
             const response = await axios.get(
-                `http://localhost:5000/api/v1/projectsummary/${projectId}`,
+                `https://task-management-m7aa.onrender.com/api/v1/projectsummary/${projectId}`,
                 config
             );
             const { project } = response.data;

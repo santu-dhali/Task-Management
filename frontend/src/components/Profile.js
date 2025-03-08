@@ -23,7 +23,7 @@ const ProfilePage = () => {
                     headers: { Authorization: `Bearer ${token}` },
                 };
 
-                const response = await axios.get(`http://localhost:5000/api/v1/profile/${userId}`, config);
+                const response = await axios.get(`https://task-management-m7aa.onrender.com/api/v1/profile/${userId}`, config);
                 setUser(response.data.user);
             } catch (err) {
                 console.error('Failed to fetch profile:', err);
@@ -41,7 +41,7 @@ const ProfilePage = () => {
             };
 
             const response = await axios.put(
-                'http://localhost:5000/api/v1/updateprofile',
+                'https://task-management-m7aa.onrender.com/api/v1/updateprofile',
                 { username: user.username, email: user.email },
                 config
             );
@@ -63,7 +63,7 @@ const ProfilePage = () => {
             };
 
             await axios.put(
-                'http://localhost:5000/api/v1/profile/changepassword',
+                'https://task-management-m7aa.onrender.com/api/v1/profile/changepassword',
                 { currentPassword, newPassword },
                 config
             );
@@ -85,7 +85,7 @@ const ProfilePage = () => {
                 headers: { Authorization: `Bearer ${token}` },
             };
 
-            await axios.delete('http://localhost:5000/api/v1/deleteprofile', config);
+            await axios.delete('https://task-management-m7aa.onrender.com/api/v1/deleteprofile', config);
 
             localStorage.removeItem('token');
             localStorage.removeItem('userId');

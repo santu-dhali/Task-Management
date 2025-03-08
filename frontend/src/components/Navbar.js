@@ -23,7 +23,7 @@ const Navbar = () => {
                     headers: { Authorization: `Bearer ${token}` },
                 };
 
-                const response = await axios.post('http://localhost:5000/api/v1/notifications', {}, config);
+                const response = await axios.post('https://task-management-m7aa.onrender.com/api/v1/notifications', {}, config);
                 setNotifications(response.data.notifications);
             } catch (err) {
                 console.error('Failed to fetch notifications:', err);

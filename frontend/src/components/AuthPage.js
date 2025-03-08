@@ -10,6 +10,7 @@ const AuthPage = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const [shouldNavigate, setShouldNavigate] = useState(false);
     const navigate = useNavigate();
 
@@ -23,9 +24,11 @@ const AuthPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+        setLoading(true);
 
         if (!isLogin && password !== confirmPassword) {
             setError('Passwords do not match');
+            setLoading(false);
             return;
         }
 
@@ -41,6 +44,7 @@ const AuthPage = () => {
             const token = isLogin ? response.data.existingUser?.token : response.data.user?.token;
             const userId = isLogin ? response.data.existingUser?._id : response.data.user?._id;
             const role = isLogin ? response.data.existingUser?.role : response.data.user?.role;
+            
             if (token) {
                 localStorage.setItem('token', token);
                 localStorage.setItem('userId', userId);
@@ -52,6 +56,8 @@ const AuthPage = () => {
         } catch (err) {
             console.error('Login/Signup failed: ', err);
             setError(err.response?.data?.message || `${isLogin ? 'Login' : 'Signup'} failed`);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -101,7 +107,13 @@ const AuthPage = () => {
                             />
                         </div>
                     )}
-                    <button type="submit">{isLogin ? 'Login' : 'Sign Up'}</button>
+                    <button type="submit" disabled={loading}>
+                        {loading ? (
+                            <span className="spinner"></span>
+                        ) : (
+                            isLogin ? 'Login' : 'Sign Up'
+                        )}
+                    </button>
                 </form>
                 <p className="toggle-auth">
                     {isLogin ? 'New Customer? ' : 'Already Signed Up? '}

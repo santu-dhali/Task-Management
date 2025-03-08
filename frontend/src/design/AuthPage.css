@@ -80,3 +80,24 @@
 .toggle-auth span:hover {
     color: #0056b3;
 }
+
+button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid white;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

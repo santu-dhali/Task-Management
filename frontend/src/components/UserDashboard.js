@@ -44,7 +44,7 @@ const UserDashboard = () => {
                 let assignedTasks = [];
                 try {
                     const assignedTasksResponse = await axios.get(
-                        `http://localhost:5000/api/v1/gettasks/${userId}`,
+                        `https://task-management-m7aa.onrender.com/api/v1/gettasks/${userId}`,
                         config
                     );
                     assignedTasks = assignedTasksResponse.data.tasks || [];
@@ -56,7 +56,7 @@ const UserDashboard = () => {
                 let taskBoardTasks = [];
                 try {
                     const userResponse = await axios.get(
-                        `http://localhost:5000/api/v1/${userId}`,
+                        `https://task-management-m7aa.onrender.com/api/v1/${userId}`,
                         config
                     );
                     const projectIds = userResponse.data.user.projects;
@@ -67,7 +67,7 @@ const UserDashboard = () => {
                     for (const projectId of projectIds) {
                         try {
                             const tasksResponse = await axios.get(
-                                `http://localhost:5000/api/v1/gettasks/${projectId}`,
+                                `https://task-management-m7aa.onrender.com/api/v1/gettasks/${projectId}`,
                                 config
                             );
                             allTasks.push(...tasksResponse.data.tasks);
@@ -85,7 +85,7 @@ const UserDashboard = () => {
 
                 try {
                     const projectsResponse = await axios.get(
-                        `http://localhost:5000/api/v1/projectdetails/getprojects`,
+                        `https://task-management-m7aa.onrender.com/api/v1/projectdetails/getprojects`,
                         config
                     );
                     setProjects(projectsResponse.data.projects);
@@ -125,7 +125,7 @@ const UserDashboard = () => {
                 headers: { Authorization: `Bearer ${token}` },
             };
             const response = await axios.post(
-                'http://localhost:5000/api/v1/createproject',
+                'https://task-management-m7aa.onrender.com/api/v1/createproject',
                 { title },
                 config
             );
@@ -144,7 +144,7 @@ const UserDashboard = () => {
                 headers: { Authorization: `Bearer ${token}` },
             };
 
-            await axios.delete(`http://localhost:5000/api/v1/deletetask/${taskToDelete}`, config);
+            await axios.delete(`https://task-management-m7aa.onrender.com/api/v1/deletetask/${taskToDelete}`, config);
             setTaskBoardTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskToDelete));
             setShowDeleteDialog(false);
         } catch (err) {
