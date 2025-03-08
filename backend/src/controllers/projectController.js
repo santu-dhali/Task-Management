@@ -129,7 +129,7 @@ exports.getProjectDetails = async (req, res) => {
   try {
     const project = await Project.findById(id)
       .populate("createdBy", "username email")
-      .populate("teamMembers", "username email")
+      .populate("teamMembers", "username email role")
       .populate("tasks", "title description status createdAt priority dueDate")
       .populate("tasks.assignee", "username email")
 

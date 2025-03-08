@@ -173,6 +173,7 @@ const TaskPage = () => {
                                 </div>
                             ) : (
                                 <div className="assignee-actions">
+                                    <p>Assign to: </p>
                                     <span className="assign-icon" onClick={() => setShowDialog(true)}>
                                         <i className="fas fa-user-plus"></i>
                                     </span>

@@ -225,8 +225,11 @@ const ProjectManagement = () => {
                     <h3>Team Members</h3>
                     <ul>
                         {project.teamMembers.map((member) => (
+                            console.log(member),
                             <li key={member._id}>
                                 <span>{member.username}</span>
+                                <span>{member.email}</span>
+                                <span>{member.role}</span>
                                 <button onClick={() => handleRemoveMember(member._id)}>Remove</button>
                             </li>
                         ))}
@@ -239,6 +242,7 @@ const ProjectManagement = () => {
                             <li key={task._id} onClick={() => navigate(`/task/${task._id}`)}>
                                 <div className="task-row">
                                     <h4>{task.title}</h4>
+                                    <p>{task.description}</p>
                                     <p>Due: {new Date(task.dueDate).toLocaleDateString()}</p>
                                     <p>Priority: {task.priority}</p>
                                     <p>Status: {task.status}</p>
