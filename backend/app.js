@@ -11,7 +11,7 @@ PORT = process.env.PORT || 4000;
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: 'https://task-managerproject.netlify.app',
+    origin: 'http://localhost:3000',
     credentials: true,
 }));
 
